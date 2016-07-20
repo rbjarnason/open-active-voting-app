@@ -1,0 +1,46 @@
+!!!
+%html
+  %head
+    :javascript
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-29922184-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    %meta{"http-equiv" => "Content-Type", :content => "text/html; charset=utf-8"}
+    %meta{content: "Kosning verkefna í hverfum Reykjavíkur", property: "og:title"}/
+    %meta{content: "Kosning verkefna í hverfum Reykjavíkur. 17. febrúar. – 24. febrúar 2015. Taktu þátt! :)", property: "og:description"}/
+    %meta{content: "website", property: "og:type"}/
+    %meta{content: "https://s3.amazonaws.com/better-reykjavik-static/betri_hverfi_facebook.png", property: "og:image"}/
+    %meta{content: "https://kjosa.betrireykjavik.is/", property: "og:url"}/
+    %meta{content: "Betri Reykjavik", property: "og:site_name"}/
+    %meta{content: "121570364590896", property: "fb:app_id"}/
+    %link{:href => "/assets/favicon.png", :rel => "icon"}/
+    %title
+      = t :layout_title
+    = stylesheet_link_tag    "application"
+    = javascript_include_tag "application"
+    = csrf_meta_tags
+  %body
+    #fb-root
+    :javascript
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=239321222789515";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    #wrapper
+      - if ENV["LOAD_TESTING_MODE"]=="true"
+        %h1
+          %div{:style=>"color: red;"}
+            LOAD TESTING MODE ACTIVE
+      = render :partial => "header"
+      #main_election_content
+        = yield
+      = render :partial => "footer"
