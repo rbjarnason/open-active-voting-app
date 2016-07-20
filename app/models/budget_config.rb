@@ -14,7 +14,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 class BudgetConfig < ActiveRecord::Base
-  set_table_name "config"
+  self.table_name = "config"
 
   validate :there_can_only_be_one
 
